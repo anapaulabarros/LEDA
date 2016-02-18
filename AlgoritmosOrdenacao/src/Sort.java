@@ -1,6 +1,5 @@
 
 public class Sort {
-
 	
 	/**
 	 * Metodo de ordenacao Selection Sort por partes
@@ -14,7 +13,7 @@ public class Sort {
 		for(int i = 0; i < A.length - 1; i++){
 			int min = i;			
 			for(int j = i + 1; j < A.length; j++){
-				if(A[j]> A[min])
+				if(A[j] < A[min])
 					min = j;
 			}
 			if(min != i){
@@ -68,7 +67,52 @@ public class Sort {
 		
 	}
 	
+	/**
+	 * Metodo para ordernar um vetor usando Merge Sort
+	 * @param A[]
+	 * @return void
+	 */
+	public void mergeSort(int[] A, int low, int high){
+		
+		if(low < high) {
+			int med = low + (high - low) / 2;
+			mergeSort(A, low, med);
+			mergeSort(A, med+1, high);
+			merge(A, low, med, high);
+		}
+	}
 	
+	private void merge(int[] a, int low, int med, int high) {
+		 int[] vetorAux = new int[a.length];
+		 for(int m = 0; m < a.length; m++) {
+			 vetorAux[m] = a[m];
+		 }
+		 int i = low;
+		 int j = med + 1;
+		 int k = low;
+		 
+		 while(i <= med && j <= high) {
+			 if(vetorAux[i] <= vetorAux[j]){
+				 a[k] = vetorAux[i];
+				 i++;
+			 }else {
+				 a[k] = vetorAux[j];
+				 j++;
+			 }
+			 k++;
+		 }
+		 while(i<=med) {
+			 a[k] = vetorAux[i];
+			 i++;
+			 k++;
+		 }
+		 while(j<=med) {
+			 a[k] = vetorAux[j];
+			 j++;
+			 k++;
+		 }	 
+	}
+
 	/**
 	 * Metodo auxiliar para realizar as trocas dentro de vetor
 	 * @param A[]

@@ -38,4 +38,10 @@ public class TestSelectionSortUnit {
 		sort.insertionSort(vetor, 1, vetor.length);
 		assertTrue(sort.isSort(vetor));
 	}
+	
+	@Test
+	public void testIsSortMergeSort() {
+		sort.mergeSort(vetor, 0, vetor.length-1);
+		assertTrue(sort.isSort(vetor));
+	}
 }

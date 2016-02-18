@@ -53,6 +53,47 @@ public class Sort<E> {
 		return A;
 	}
 	
+	public void mergeSort(E[] A, int low, int high){
+		
+		if(low < high) {
+			int med = low + (high - low) / 2;
+			mergeSort(A, low, med);
+			mergeSort(A, med+1, high);
+			merge(A, low, med, high);
+		}
+	}
+	
+	private void merge(E[] a, int low, int med, int high) {
+		 E[] vetorAux = (E[]) new Object[a.length];
+		 for(int m = 0; m < a.length; m++) {
+			 vetorAux[m] = a[m];
+		 }
+		 int i = low;
+		 int j = med + 1;
+		 int k = low;
+		 
+		 while(i <= med && j <= high) {
+			 if(((Comparable<E>) vetorAux[i]).compareTo((E) vetorAux[j]) <= 0){
+				 a[k] = vetorAux[i];
+				 i++;
+			 }else {
+				 a[k] = vetorAux[j];
+				 j++;
+			 }
+			 k++;
+		 }
+		 while(i<=med) {
+			 a[k] = vetorAux[i];
+			 i++;
+			 k++;
+		 }
+		 while(j<=med) {
+			 a[k] = vetorAux[j];
+			 j++;
+			 k++;
+		 }	 
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T> boolean isSort(E[] A) {
 		boolean sort = true;
