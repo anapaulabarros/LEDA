@@ -66,4 +66,66 @@ public CountingSort(){}
         for (int i = 0; i < arr.length; i++)
             arr[i] = output[i];
     }
+	
+	
+	
+	/**
+	 * Metodo para ordenar usando o algoritmo Counting Sort 
+	 * @param array
+	 * @param leftIndex
+	 * @param rightIndex]
+	 * @return void
+	 */
+	public void sort(Integer[] array,int leftIndex, int rightIndex) {
+		if(array.length <= 0)
+			return;
+		
+		int maxValueOfArray = getMaxValue(array); // obtem o maior elemento dentro do array
+	
+		Integer[] vetorContador = new Integer[maxValueOfArray]; //inicia o vetor auxiliar
+		Integer[] vetorAux = new Integer[array.length]; //array final com valores ordenados		
+		Arrays.fill(vetorContador, 0); //preenche os elementos do vetor com 0
+
+		/*Contagem de elemetos*/
+		for(int i = 0; i < array.length; i++) {
+			if(array[i]-1 < 0)
+				vetorContador[0]++;
+			else
+				vetorContador[array[i]-1]++;
+		}
+		
+		/*Soma acumulativa*/
+		for(int i = 1; i < vetorContador.length; i++) {
+			vetorContador[i] = vetorContador[i-1] + vetorContador[i];
+		}
+		/*ordena os valores com base no vetor auxiliar e o vetor original*/
+		for(int i = array.length - 1; i >= 0; i--){
+			if(array[i]-1  >= 0){
+				vetorAux[vetorContador[array[i] - 1] - 1] = array[i];
+				vetorContador[array[i] - 1]--;
+			}else{
+				vetorAux[vetorContador[array[i] - 1 +1 ] - 1] = array[i];
+				vetorContador[0]--;
+			}
+		}
+		/*copia os valores do vetor aux para o vetor original*/
+		for(int i = 0; i < array.length; i++) {
+			array[i] = vetorAux[i];
+		}
+	}
+	
+	
+	/**
+	 * Metodo para obter o maior valor dentro do array
+	 * @param array
+	 * @return int
+	 */
+	private int getMaxValue(Integer[] array){
+		int min = array[0];
+		for (Integer elements : array) {
+			if(elements > min)
+				min = elements;
+		}
+		return min;
+	}
 }
