@@ -77,7 +77,7 @@ public CountingSort(){}
 	 * @return void
 	 */
 	public void sort(Integer[] array,int leftIndex, int rightIndex) {
-		if(array.length <= 0)
+		if(array.length <= 1)
 			return;
 		
 		int maxValueOfArray = getMaxValue(array); // obtem o maior elemento dentro do array
