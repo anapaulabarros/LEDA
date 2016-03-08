@@ -13,12 +13,12 @@ public CountingSort(){}
 	 * @return int[] array auxiliar ordenado
 	 * */
 	public int[] sort(int[] A, int max){
-		int[] vetorContador = new int[max]; //inicia o vetor auxiliar
+		int[] vetorContador = new int[max+1]; //inicia o vetor auxiliar
 		int[] vetorAux = new int[A.length]; //array final com valores ordenados
 		
 		/*Contagem de elemetos*/
 		for(int i = 0; i < A.length; i++) {
-			vetorContador[A[i]-1]++;
+			vetorContador[A[i]]++;
 		}
 		/*Soma acumulativa*/
 		for(int i = 1; i < vetorContador.length; i++) {
@@ -27,8 +27,8 @@ public CountingSort(){}
 		
 		/*ordena os valores com base no vetor auxiliar e o vetor original*/
 		for(int i = A.length - 1; i >= 0; i--){
-			vetorAux[vetorContador[A[i] - 1] - 1] = A[i];
-			vetorContador[A[i] - 1]--;
+			vetorAux[vetorContador[A[i]] - 1] = A[i];
+			vetorContador[A[i]]--;
 		}
 		
 		return vetorAux;
@@ -82,16 +82,13 @@ public CountingSort(){}
 		
 		int maxValueOfArray = getMaxValue(array); // obtem o maior elemento dentro do array
 	
-		Integer[] vetorContador = new Integer[maxValueOfArray]; //inicia o vetor auxiliar
+		Integer[] vetorContador = new Integer[maxValueOfArray + 1]; //inicia o vetor auxiliar
 		Integer[] vetorAux = new Integer[array.length]; //array final com valores ordenados		
 		Arrays.fill(vetorContador, 0); //preenche os elementos do vetor com 0
 
 		/*Contagem de elemetos*/
 		for(int i = 0; i < array.length; i++) {
-			if(array[i]-1 < 0)
-				vetorContador[0]++;
-			else
-				vetorContador[array[i]-1]++;
+			vetorContador[array[i]]++;
 		}
 		
 		/*Soma acumulativa*/
@@ -100,13 +97,8 @@ public CountingSort(){}
 		}
 		/*ordena os valores com base no vetor auxiliar e o vetor original*/
 		for(int i = array.length - 1; i >= 0; i--){
-			if(array[i]-1  >= 0){
-				vetorAux[vetorContador[array[i] - 1] - 1] = array[i];
-				vetorContador[array[i] - 1]--;
-			}else{
-				vetorAux[vetorContador[array[i] - 1 +1 ] - 1] = array[i];
-				vetorContador[0]--;
-			}
+			vetorAux[vetorContador[array[i]] - 1] = array[i];
+			vetorContador[array[i]]--;
 		}
 		/*copia os valores do vetor aux para o vetor original*/
 		for(int i = 0; i < array.length; i++) {
