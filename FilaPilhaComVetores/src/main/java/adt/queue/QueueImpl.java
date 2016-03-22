@@ -50,7 +50,7 @@ public class QueueImpl<T> implements Queue<T> {
 	public T dequeue() throws QueueUnderflowException {
 		if(this.isEmpty())
 			throw new QueueUnderflowException();
-		Object out = array[tail];
+		Object out = array[0];
 		this.shiftLeft();
 		return (T) out;
 		
