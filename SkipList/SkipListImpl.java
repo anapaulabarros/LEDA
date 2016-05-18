@@ -200,4 +200,22 @@ public class SkipListImpl<T> implements SkipList<T> {
 		auxRoot = auxRoot.forward[0];
 		return auxRoot;
 	}
+	
+	/*Imprimir os nos por nivel*/
+	public void printNodesByHeight(){
+		int level = this.maxHeight;
+        ArrayList<SkipListNode<T>> listaOrdenada = new ArrayList<SkipListNode<T>>(); 
+        SkipListNode<T>[] array = this.toArray();
+       
+        while(listaOrdenada.size() < size()){
+        	for(SkipListNode<T> no : array){
+        		if(no.getHeight() == level && no != NIL){
+        			listaOrdenada.add(no);
+                }
+            }
+            level--;
+        }
+        System.out.println(Arrays.toString(listaOrdenada.toArray(new SkipListNode[0])));
+		
+	}
 }
