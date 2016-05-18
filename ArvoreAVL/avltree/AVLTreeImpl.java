@@ -1,5 +1,10 @@
 package adt.avltree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 import adt.bst.BSTImpl;
 import adt.bst.BSTNode;
 import adt.bt.BTNode;
@@ -174,6 +179,27 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements
 			else
 				pivot.getParent().setLeft(pivot);
 		}
+	}
+	
+	/*Imprime nos da AVL por nível*/
+	public T[] printByLevel(){
+		Queue<BSTNode<T>> level = new LinkedList<BSTNode<T>>();
+		List<T> list = new ArrayList<T>();
+		
+	    level.add(root);
+	    while(!level.isEmpty()){
+	    	 BSTNode<T> aux = level.poll();
+	    	 if(aux.getData() != null)
+	    		 list.add(aux.getData());
+	    		 //System.out.print(aux.getData() + " ");
+	         if(aux.getLeft()!= null)
+	         level.add((BSTNode<T>) aux.getLeft());
+	         if(aux.getRight()!= null)
+	         level.add((BSTNode<T>) aux.getRight());
+	    }
+	    
+		T[] array = (T[]) new Comparable[this.size()];
+	    return (T[]) list.toArray(array);
 	}
 
 }
